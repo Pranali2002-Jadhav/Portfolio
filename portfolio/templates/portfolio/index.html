@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }} | Portfolio</title>
+    <link rel="stylesheet" href="{% static 'portfolio/style.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="container nav-container">
+        <a href="#home" class="logo">{{ short_name }}.</a>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <a href="{% static 'ppj.pdf' %}" target="_blank" class="resume-btn">Resume</a>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="container hero-container">
+        <div class="hero-left">
+            <span class="hero-badge">{{ role }}</span>
+            <h1>Hi, I'm <span>{{ name }}</span></h1>
+            <h2>{{ hero_title }}</h2>
+            <p>{{ tagline }}</p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="{{ github }}" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="{{ linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:{{ email }}"><i class="fas fa-envelope"></i></a>
+                <a href="tel:{{ phone }}"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="profile-card">
+                <div class="profile-ring">
+                    <img src="{% static 'pannu.jpeg' %}" alt="Profile" class="profile-img">
+                </div>
+                <h3>{{ name }}</h3>
+                <p>{{ role }}</p>
+                <div class="mini-info">
+                    <span>Django</span>
+                    <span>Python</span>
+                    <span>SQL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about section" id="about">
+    <div class="container">
+        <div class="section-heading">
+            <span>About Me</span>
+            <h2>Who I Am</h2>
+        </div>
+
+        <div class="about-box">
+            <p>{{ about_text }}</p>
+
+            <div class="about-details">
+                <div class="detail-card">
+                    <i class="fas fa-location-dot"></i>
+                    <div>
+                        <h4>Location</h4>
+                        <p>{{ location }}</p>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:{{ email }}">{{ email }}</a></p>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Phone</h4>
+                        <p><a href="tel:{{ phone }}">{{ phone }}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="skills section" id="skills">
+    <div class="container">
+        <div class="section-heading">
+            <span>My Skills</span>
+            <h2>Technologies I Use</h2>
+        </div>
+
+        <div class="skills-container">
+            {% for category, items in skills.items %}
+            <div class="skill-category">
+                <h3>{{ category }}</h3>
+                <div class="skill-tags">
+                    {% for skill in items %}
+                        <span class="skill-btn">{{ skill.name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="projects section" id="projects">
+    <div class="container">
+        <div class="section-heading">
+            <span>My Projects</span>
+            <h2>Recent Work</h2>
+        </div>
+
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card">
+                <div class="project-top">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <span class="project-tech">{{ project.tech }}</span>
+                <a href="{{ project.link }}" target="_blank" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="contact section" id="contact">
+    <div class="container">
+        <div class="section-heading">
+            <span>Contact</span>
+            <h2>Let's Connect</h2>
+        </div>
+
+        <div class="contact-grid">
+            <a href="mailto:{{ email }}" class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>{{ email }}</p>
+            </a>
+
+            <a href="tel:{{ phone }}" class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h3>Phone</h3>
+                <p>{{ phone }}</p>
+            </a>
+
+            <a href="{{ github }}" target="_blank" class="contact-card">
+                <i class="fab fa-github"></i>
+                <h3>GitHub</h3>
+                <p>Open Profile</p>
+            </a>
+
+            <a href="{{ linkedin }}" target="_blank" class="contact-card">
+                <i class="fab fa-linkedin-in"></i>
+                <h3>LinkedIn</h3>
+                <p>Open Profile</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 {{ name }} | Portfolio</p>
+    </div>
+</footer>
+
+</body>
+</html>
